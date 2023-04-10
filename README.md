@@ -13,9 +13,17 @@ PubScale is a lightweight plugin that allows you to seamlessly insert, update, a
 
 To get started with PubScale, follow these simple steps:
 
-1. Install the PubScale plugin through the Obsidian Community Plugins.
-2. Configure the plugin by adding your PlanetScale credentials and the desired database and table.
-3. Open the note you want to sync with PlanetScale.
+1. Create a table in the planetScale database to store your obsidian notes. The table name can be freely set. Column names are currently fixed for `title` and `content`.
+   For example, enter the following command in the planetScale console. 
+   ```
+   CREATE TABLE posts (
+     title varchar(255) NOT NULL PRIMARY KEY,
+     content TEXT NOT NULL
+   );
+   ```
+2. Install the PubScale plugin through the Obsidian Community Plugins.
+3. Configure the plugin by adding your PlanetScale credentials and the desired database and table.
+4. Open the note you want to sync with PlanetScale.
 
 ## Usage
 

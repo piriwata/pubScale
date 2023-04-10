@@ -1,7 +1,7 @@
 
 # PubScale for Obsidian
 
-PubScale is a lightweight plugin that allows you to seamlessly insert, update, and delete markdown text in Obsidian vault into PlanetScale tables. You can leverage PlanetScale as a content management store and Obsidian as your preferred content editor.
+PubScale is a lightweight plugin that allows you to seamlessly insert, update, and delete markdown text in Obsidian vault into PlanetScale tables. You can leverage PlanetScale as a content storage and Obsidian as your preferred content editor.　Note that this plugin is not intended to use planetScale to back up your vault.
 
 ## Features
 
@@ -11,7 +11,7 @@ PubScale is a lightweight plugin that allows you to seamlessly insert, update, a
 
 ## Setup
 
-To get started with PubScale, follow these simple steps:
+To get started with PubScale, follow these steps:
 
 1. Create a table in the planetScale database to store your obsidian notes. The table name can be freely set. Column names are currently fixed for `title` and `content`.
    For example, enter the following command in the planetScale console. 

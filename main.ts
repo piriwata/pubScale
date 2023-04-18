@@ -25,23 +25,21 @@ export default class PubScalePlugin extends Plugin {
 		this.addCommand({
 			id: "action.publish",
 			name: "Publish an active note to PlanetScale",
-			editorCallback: (editor, view) => {
-				if (view.file === null) {
-					new Notice("No active file to publish.");
-					return;
+			editorCheckCallback: (checking, editor, ctx) => {
+				if (checking) {
+					return ctx.file !== null;
 				}
-				this.insertToPlanetScale(view.file);
+				this.insertToPlanetScale(ctx.file!);
 			},
 		});
 		this.addCommand({
 			id: "action.delete",
 			name: "Delete an active note from PlanetScale",
-			editorCallback: (editor, view) => {
-				if (view.file === null) {
-					new Notice("No active file to delete.");
-					return;
+			editorCheckCallback: (checking, editor, ctx) => {
+				if (checking) {
+					return ctx.file !== null;
 				}
-				this.deleteFromPlanetScale(view.file);
+				this.deleteFromPlanetScale(ctx.file!);
 			},
 		});
 

@@ -23,7 +23,7 @@ export default class PubScalePlugin extends Plugin {
 		await this.loadSettings();
 
 		this.addCommand({
-			id: "pubScale.action.publish",
+			id: "action.publish",
 			name: "Publish an active note to PlanetScale",
 			editorCallback: (editor, view) => {
 				if (view.file === null) {
@@ -34,7 +34,7 @@ export default class PubScalePlugin extends Plugin {
 			},
 		});
 		this.addCommand({
-			id: "pubScale.action.delete",
+			id: "action.delete",
 			name: "Delete an active note from PlanetScale",
 			editorCallback: (editor, view) => {
 				if (view.file === null) {

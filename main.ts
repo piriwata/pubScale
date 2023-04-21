@@ -45,15 +45,19 @@ export default class PubScalePlugin extends Plugin {
 		await this.saveData(this.settings);
 	}
 
-	async insertToPlanetScale(file: TFile) {
-		const title = file.basename;
-		new Notice(`Publishing... "${title}"`);
-		const client = await createPlanetScaleClient({
+	async createClient() {
+		return await createPlanetScaleClient({
 			user: this.settings.username,
 			password: this.settings.password,
 			host: this.settings.hostUrl,
 			database: this.settings.database,
 		});
+	}
+
+	async insertToPlanetScale(file: TFile) {
+		const title = file.basename;
+		new Notice(`Publishing... "${title}"`);
+		const client = await this.createClient();
 		const error = await client.insertPost(file);
 
 		if (error) {

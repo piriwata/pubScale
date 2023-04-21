@@ -1,4 +1,10 @@
-import { App, PluginSettingTab, Setting } from "obsidian";
+import {
+	App,
+	ButtonComponent,
+	Notice,
+	PluginSettingTab,
+	Setting,
+} from "obsidian";
 import PubScalePlugin from "../main";
 
 export class PubScaleSettingTab extends PluginSettingTab {
@@ -29,6 +35,24 @@ export class PubScaleSettingTab extends PluginSettingTab {
 				});
 			}
 		);
+
+		const buttonContainer = containerEl.createEl("div");
+		buttonContainer.setAttrs({
+			align: "right",
+			style: "margin-bottom: 16px",
+		});
+
+		// Test connection
+		new ButtonComponent(buttonContainer)
+			.setButtonText("Test connection")
+			.onClick(async () => {
+				try {
+					await this.plugin.createClient();
+					new Notice("Successfully connected to database.");
+				} catch (e) {
+					new Notice(`Failed to connect to database: ${e}`);
+				}
+			});
 
 		// Username
 		new Setting(containerEl)

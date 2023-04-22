@@ -37,8 +37,9 @@ export async function createPlanetScaleClient(
           [file.basename, content, content]
         );
       } catch (e) {
-        console.error(e);
-        return e.message;
+        if (e instanceof Error) {
+       	  return e.message;
+        }
       }
     },
     async deletePost(file: TFile) {
@@ -47,8 +48,9 @@ export async function createPlanetScaleClient(
           file.basename,
         ]);
       } catch (e) {
-        console.error(e);
-        return e.message;
+        if (e instanceof Error) {
+          return e.message;
+        }
       }
     },
   };

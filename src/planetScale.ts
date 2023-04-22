@@ -1,9 +1,4 @@
-import {
-	createConnection,
-	ConnectionOptions,
-	ResultSetHeader,
-	FieldPacket,
-} from "mysql2/promise";
+import { createConnection } from "mysql2/promise";
 import { TFile } from "obsidian";
 
 export interface planetScaleClient {
@@ -11,14 +6,25 @@ export interface planetScaleClient {
 	deletePost: (file: TFile) => Promise<string | undefined>;
 }
 
-export interface planetScaleClientConfig extends ConnectionOptions {}
+export interface planetScaleClientConfig {
+	host: string;
+	user: string;
+	password: string;
+	database: string;
+	port?: number;
+	ssl?: boolean;
+}
 
 export async function createPlanetScaleClient(
 	config: planetScaleClientConfig
 ): Promise<planetScaleClient> {
 	const connection = await createConnection({
-		ssl: { rejectUnauthorized: false },
-		...config,
+		host: config.host,
+		user: config.user,
+		password: config.password,
+		database: config.database,
+		port: config.port,
+		ssl: { rejectUnauthorized: config.ssl || false },
 	});
 
 	return {
@@ -26,11 +32,10 @@ export async function createPlanetScaleClient(
 			try {
 				const content = await file.vault.read(file);
 				console.log(typeof content);
-				const [response, _]: [ResultSetHeader, FieldPacket[]] =
-					await connection.execute(
-						"INSERT INTO posts (title, content) VALUES (?, ?) ON DUPLICATE KEY UPDATE content = ?",
-						[file.basename, content, content]
-					);
+				await connection.execute(
+					"INSERT INTO posts (title, content) VALUES (?, ?) ON DUPLICATE KEY UPDATE content = ?",
+					[file.basename, content, content]
+				);
 			} catch (e) {
 				console.error(e);
 				return e.message;
@@ -38,11 +43,9 @@ export async function createPlanetScaleClient(
 		},
 		async deletePost(file: TFile) {
 			try {
-				const [response, _]: [ResultSetHeader, FieldPacket[]] =
-					await connection.execute(
-						"DELETE FROM posts WHERE title = ?",
-						[file.basename]
-					);
+				await connection.execute("DELETE FROM posts WHERE title = ?", [
+					file.basename,
+				]);
 			} catch (e) {
 				console.error(e);
 				return e.message;

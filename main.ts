@@ -29,6 +29,7 @@ export default class PubScalePlugin extends Plugin {
 				if (checking) {
 					return ctx.file !== null;
 				}
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				this.insertToPlanetScale(ctx.file!);
 			},
 		});
@@ -39,6 +40,7 @@ export default class PubScalePlugin extends Plugin {
 				if (checking) {
 					return ctx.file !== null;
 				}
+				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 				this.deleteFromPlanetScale(ctx.file!);
 			},
 		});

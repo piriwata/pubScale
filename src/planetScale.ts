@@ -33,7 +33,7 @@ export async function createPlanetScaleClient(
         const content = await file.vault.read(file);
         console.log(typeof content);
         await connection.execute(
-          "INSERT INTO posts (title, content) VALUES (?, ?) ON DUPLICATE KEY UPDATE content = ?",
+          "INSERT INTO posts (slug, content) VALUES (?, ?) ON DUPLICATE KEY UPDATE content = ?",
           [file.basename, content, content]
         );
       } catch (e) {
@@ -43,7 +43,7 @@ export async function createPlanetScaleClient(
     },
     async deletePost(file: TFile) {
       try {
-        await connection.execute("DELETE FROM posts WHERE title = ?", [
+        await connection.execute("DELETE FROM posts WHERE slug = ?", [
           file.basename,
         ]);
       } catch (e) {

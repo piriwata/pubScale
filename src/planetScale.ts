@@ -38,7 +38,7 @@ export async function createPlanetScaleClient(
         );
       } catch (e) {
         if (e instanceof Error) {
-       	  return e.message;
+          return e.message;
         }
       }
     },

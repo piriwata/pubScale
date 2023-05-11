@@ -31,7 +31,6 @@ export async function createPlanetScaleClient(
     async insertPost(file: TFile) {
       try {
         const content = await file.vault.read(file);
-        console.log(typeof content);
         await connection.execute(
           "INSERT INTO posts (slug, content) VALUES (?, ?) ON DUPLICATE KEY UPDATE content = ?",
           [file.basename, content, content]

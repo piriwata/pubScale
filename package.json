@@ -1,7 +1,7 @@
 {
 	"name": "pubscale-obsidian",
-	"version": "0.1.2",
-	"description": "An obsidian plugin for insert your note into a PlanetScale table.",
+	"version": "0.2.0",
+	"description": "An obsidian plugin seamlessly to sync markdown notes into PlanetScale tables.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "vite build --watch --mode development",

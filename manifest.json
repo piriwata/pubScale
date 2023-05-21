@@ -1,7 +1,7 @@
 {
 	"id": "pubscale",
 	"name": "PubScale",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"minAppVersion": "0.15.9",
 	"description": "Seamlessly sync markdown notes into PlanetScale tables.",
 	"author": "piriwata",

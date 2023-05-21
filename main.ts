@@ -1,5 +1,6 @@
 import {
   App,
+  MarkdownView,
   Notice,
   Plugin,
   PluginSettingTab,
@@ -25,23 +26,23 @@ export default class PubScalePlugin extends Plugin {
     this.addCommand({
       id: "action.publish",
       name: "Publish an active note to PlanetScale",
-      editorCheckCallback: (checking, editor, ctx) => {
+      checkCallback: (checking) => {
         if (checking) {
-          return ctx.file !== null;
+          return Boolean(this.app.workspace.getActiveViewOfType(MarkdownView));
         }
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.insertToPlanetScale(ctx.file!);
+        this.insertToPlanetScale(this.app.workspace.getActiveFile()!);
       },
     });
     this.addCommand({
       id: "action.delete",
       name: "Delete an active note from PlanetScale",
-      editorCheckCallback: (checking, editor, ctx) => {
+      checkCallback: (checking) => {
         if (checking) {
-          return ctx.file !== null;
+          return Boolean(this.app.workspace.getActiveViewOfType(MarkdownView));
         }
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.deleteFromPlanetScale(ctx.file!);
+        this.deleteFromPlanetScale(this.app.workspace.getActiveFile()!);
       },
     });
 

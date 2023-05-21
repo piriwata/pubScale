@@ -3,7 +3,7 @@
 	"name": "PubScale",
 	"version": "0.1.2",
 	"minAppVersion": "0.15.9",
-	"description": "An obsidian plugin for insert your note into a PlanetScale table.",
+	"description": "Seamlessly sync markdown notes into PlanetScale tables.",
 	"author": "piriwata",
 	"authorUrl": "https://github.com/piriwata",
 	"isDesktopOnly": false
